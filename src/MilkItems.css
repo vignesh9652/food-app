@@ -1,0 +1,115 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.milk-container {
+  width: 95%;
+  max-width: 1300px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
+.milk-title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #1b5e20;
+  margin-bottom: 40px;
+}
+
+.milk-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 30px;
+}
+
+.milk-card {
+  background: #ffffff;
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.milk-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+}
+
+.milk-image {
+  width: 170px;
+  height: 170px;
+  object-fit: contain;
+  margin-bottom: 15px;
+  transition: transform 0.3s;
+}
+
+.milk-card:hover .milk-image {
+  transform: scale(1.08);
+}
+
+.milk-card h3 {
+  font-size: 1.4rem;
+  color: #333;
+  margin: 12px 0;
+}
+
+.price {
+  font-size: 1.3rem;
+  color: #2e7d32;
+  font-weight: bold;
+  margin-bottom: 18px;
+}
+
+.buy-btn {
+  border: none;
+  background: #43a047;
+  color: white;
+  padding: 12px 22px;
+  font-size: 16px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.buy-btn:hover {
+  background: #2e7d32;
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .milk-title {
+    font-size: 2rem;
+  }
+
+  .milk-image {
+    width: 140px;
+    height: 140px;
+  }
+
+  .milk-card {
+    padding: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .milk-title {
+    font-size: 1.7rem;
+  }
+
+  .milk-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .milk-image {
+    width: 120px;
+    height: 120px;
+  }
+
+  .buy-btn {
+    width: 100%;
+  }
+}

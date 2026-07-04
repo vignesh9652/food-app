@@ -1,0 +1,188 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f6f9;
+}
+
+/* Hero */
+
+.hero {
+    min-height: 60vh;
+   background: linear-gradient(135deg, #11998e, #cae2d3);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 40px 20px;
+}
+
+.hero-badge {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px 22px;
+    border-radius: 30px;
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.hero-text {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.hero-subtitle {
+    max-width: 700px;
+    font-size: 18px;
+    line-height: 1.8;
+    opacity: 0.95;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+
+.hero {
+    min-height: 50vh;
+}
+
+.hero h1 {
+    font-size: 3rem;
+}
+
+.hero-text {
+    font-size: 1.2rem;
+}
+
+.hero-subtitle {
+    font-size: 16px;
+}
+
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+
+.hero {
+    padding: 60px 20px;
+}
+
+.hero h1 {
+    font-size: 2.3rem;
+}
+
+.hero-text {
+    font-size: 1rem;
+}
+
+.hero-subtitle {
+    font-size: 15px;
+}
+
+.hero-badge {
+    font-size: 13px;
+    padding: 8px 18px;
+}
+
+}
+
+/* About */
+
+.about {
+    text-align: center;
+    padding: 60px 20px;
+    background: white;
+}
+
+.about h2 {
+    color: #28a745;
+    margin-bottom: 20px;
+}
+
+.about p {
+    max-width: 700px;
+    margin: auto;
+    color: #555;
+    line-height: 1.8;
+}
+
+/* Services */
+
+.services {
+    padding: 60px 8%;
+}
+
+.services h2 {
+    text-align: center;
+    color: #28a745;
+    margin-bottom: 40px;
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+}
+
+.card span {
+    font-size: 45px;
+}
+
+.card h3 {
+    margin: 15px 0;
+    color: #28a745;
+}
+
+.card p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+
+.hero {
+    padding: 70px 20px;
+}
+
+.hero h1 {
+    font-size: 2.2rem;
+}
+
+.hero p {
+    font-size: 16px;
+}
+
+.about,
+.services {
+    padding: 40px 20px;
+}
+
+}

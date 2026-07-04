@@ -104,7 +104,7 @@ function VegItems() {
 
               <div className="price-section">
                 <span className="price">₹{vegItem.price}</span>
-                <span className="old-price">₹50</span>
+              
               </div>
 
               <button

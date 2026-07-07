@@ -1,17 +1,11 @@
 import "./VegItems.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import type { Product } from "./interfaces/Product";
 
-interface VegItem {
-  id: number;
-  name: string;
-  price: number;
-  imageurl: string;
-  description: string;
-}
 
 function VegItems() {
-  const vegItems: VegItem[] = [
+  const vegItems: Product[] = [
     {
       id: 1,
       name: "Beans",
@@ -70,7 +64,7 @@ function VegItems() {
     },
   ];
 
-  const handleAddToCart = (item: VegItem) => {
+  const handleAddToCart = (item: Product) => {
     toast.success(`${item.name} added to cart 🛒`, {
       position: "top-right",
       autoClose: 2000,

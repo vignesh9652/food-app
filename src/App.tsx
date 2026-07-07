@@ -6,15 +6,18 @@ import VegItems from "./VegItems";
 import NonVegItems from "./NonVegItems";
 import MilkItems from "./MilkItems";
 import { FcHome } from "react-icons/fc";
+import Register from "./components/Register";
 
 const App = () => {
   return (
+  
     <BrowserRouter>
       <nav>
         <NavLink to="/home"><FcHome/>Home</NavLink>
         <NavLink to="/veg-items">Veg Items</NavLink>
         <NavLink to="/non-veg-items">Non Veg Items</NavLink>
         <NavLink to="/milk-items">Milk Items</NavLink>
+        <NavLink to="/register">Register</NavLink>
       </nav>
 
       <div className="container">
@@ -23,9 +26,11 @@ const App = () => {
           <Route path="/veg-items" element={<VegItems />} />
           <Route path="/non-veg-items" element={<NonVegItems />} />
           <Route path="/milk-items" element={<MilkItems />} />
+          <Route path="/register" element={<Register/>} />
         </Routes>
       </div>
     </BrowserRouter>
+    
   );
 };
 

@@ -3,7 +3,7 @@ import type { Product } from "../interfaces/Product";
 
 export const addToCart = (draft: CartItem[], product: Product) => {
 
-    const item = draft.find(x => x.id === product.id);
+    const item = draft.find(pro => pro.id === product.id);
 
     if (item) {
 
@@ -22,7 +22,7 @@ export const addToCart = (draft: CartItem[], product: Product) => {
 
 export const removeFromCart = (draft: CartItem[], id: number) => {
 
-    const index = draft.findIndex(x => x.id === id);
+    const index = draft.findIndex(pro => pro.id === id);
 
     if (index !== -1) {
 
@@ -35,7 +35,7 @@ export const removeFromCart = (draft: CartItem[], id: number) => {
 
 export const increaseQuantity = (draft: CartItem[], id: number) => {
 
-    const item = draft.find(x => x.id === id);
+    const item = draft.find(pro => pro.id === id);
 
     if (item) {
 
@@ -50,7 +50,7 @@ export const increaseQuantity = (draft: CartItem[], id: number) => {
 
 export const decreaseQuantity = (draft: CartItem[], id: number) => {
 
-    const item = draft.find(x => x.id === id);
+    const item = draft.find(pro => pro.id === id);
 
     if (!item) return;
 
@@ -60,7 +60,7 @@ export const decreaseQuantity = (draft: CartItem[], id: number) => {
 
     } else {
 
-        const index = draft.findIndex(x => x.id === id);
+        const index = draft.findIndex(pro => pro.id === id);
 
         draft.splice(index, 1);
 

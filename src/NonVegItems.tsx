@@ -3,7 +3,6 @@ import { CartContext } from "./contextApi/CartContext";
 import { toast } from "react-toastify";
 import type { Product } from "./interfaces/Product";
 import { nonVegItems } from "./data/Products";
-import { FiClock } from "react-icons/fi";
 import "./NonVegItems.css";
 
 function NonVegItems() {

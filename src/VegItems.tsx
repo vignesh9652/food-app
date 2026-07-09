@@ -2,70 +2,12 @@ import { useContext } from "react";
 import { CartContext } from "./contextApi/CartContext";
 import { toast } from "react-toastify";
 import type { Product } from "./interfaces/Product";
+import { vegItems } from "./data/Products";
 import { FiClock } from "react-icons/fi";
 import "./VegItems.css";
 
 function VegItems() {
   const { cart, addToCart, increaseQuantity, decreaseQuantity } = useContext(CartContext);
-
-  const vegItems: Product[] = [
-    {
-      id: 101,
-      name: "Beans",
-      price: 30,
-      imageurl: "/images/vegitems/beans.png",
-      description: "Fresh green beans, packed with proteins and fiber.",
-    },
-    {
-      id: 102,
-      name: "Brinjal",
-      price: 20,
-      imageurl: "/images/vegitems/brinjal.png",
-      description: "Glossy purple brinjal, perfect for baking and curries.",
-    },
-    {
-      id: 103,
-      name: "Broccoli",
-      price: 80,
-      imageurl: "/images/vegitems/broccoli.png",
-      description: "Crisp, nutrient-rich organic broccoli heads.",
-    },
-    {
-      id: 104,
-      name: "Capsicum",
-      price: 40,
-      imageurl: "/images/vegitems/capsicum.png",
-      description: "Fresh and crunchy green bell peppers.",
-    },
-    {
-      id: 105,
-      name: "Onion",
-      price: 35,
-      imageurl: "/images/vegitems/onion.png",
-      description: "Farm-fresh onions with sharp flavor.",
-    },
-    {
-      id: 106,
-      name: "Carrot",
-      price: 60,
-      imageurl: "/images/vegitems/carrot.png",
-      description: "Sweet, crunchy orange carrots directly from the farm.",
-    },
-    {
-      id: 107,
-      name: "Tomato",
-      price: 25,
-      imageurl: "/images/vegitems/tomato.png",
-      description: "Juicy, ripe red tomatoes ideal for salads and gravies.",
-    },
-    {
-      id: 108,
-      name: "Palak",
-      price: 30,
-      imageurl: "/images/vegitems/palak.png",
-      description: "Freshly harvested green spinach leaves.",
-    },
-  ];
 
   const handleAddToCart = (item: Product) => {
     addToCart(item);
@@ -93,9 +35,7 @@ function VegItems() {
                   className="product-image"
                 />
                 <span className="badge-tag">Organic</span>
-                <span className="delivery-time-tag">
-                  <FiClock className="clock-icon" /> 10 MINS
-                </span>
+                
               </div>
 
               <div className="product-details">

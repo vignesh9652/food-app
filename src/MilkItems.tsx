@@ -2,49 +2,12 @@ import { useContext } from "react";
 import { CartContext } from "./contextApi/CartContext";
 import { toast } from "react-toastify";
 import type { Product } from "./interfaces/Product";
+import { milkItems } from "./data/Products";
 import { FiClock } from "react-icons/fi";
 import "./MilkItems.css";
 
 function MilkItems() {
   const { cart, addToCart, increaseQuantity, decreaseQuantity } = useContext(CartContext);
-
-  const milkItems: Product[] = [
-    {
-      id: 301,
-      name: "Milk",
-      price: 38,
-      imageurl: "/images/milkitems/milk.png",
-      description: "Pasteurized farm fresh milk, rich in calcium and vitamins.",
-    },
-    {
-      id: 302,
-      name: "Curd",
-      price: 38,
-      imageurl: "/images/milkitems/curd.png",
-      description: "Thick and creamy probiotic yogurt, good for digestion.",
-    },
-    {
-      id: 303,
-      name: "Paneer",
-      price: 98,
-      imageurl: "/images/milkitems/paneer.png",
-      description: "Fresh and soft cottage cheese block, packed with protein.",
-    },
-    {
-      id: 304,
-      name: "Cheese",
-      price: 120,
-      imageurl: "/images/milkitems/cheese.png",
-      description: "Premium processed cheese slices, melts beautifully.",
-    },
-    {
-      id: 305,
-      name: "Butter",
-      price: 55,
-      imageurl: "/images/milkitems/butter.png",
-      description: "Rich, salted farm butter, perfect for spreading & baking.",
-    },
-  ];
 
   const handleAddToCart = (item: Product) => {
     addToCart(item);

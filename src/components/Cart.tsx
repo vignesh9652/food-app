@@ -1,10 +1,12 @@
 import { useContext, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { CartContext } from "../contextApi/CartContext";
 import { coupons } from "../data/Coupons";
 import { FiTag, FiCheckCircle, FiAlertCircle } from "react-icons/fi";
 import "./Cart.css";
 
 function Cart() {
+  const navigate = useNavigate();
   const {
     cart,
     increaseQuantity,
@@ -221,7 +223,19 @@ function Cart() {
                 </div>
               </div>
 
-              <button className="checkout-btn">
+              <button
+                className="checkout-btn"
+                onClick={() =>
+                  navigate("/checkout", {
+                    state: {
+                      grandTotal,
+                      discount,
+                      finalAmount,
+                      couponPercent,
+                    },
+                  })
+                }
+              >
                 Proceed to Checkout
               </button>
             </div>

@@ -5,12 +5,18 @@ import {
   FaMapMarkerAlt,
   FaUser,
   FaPhone,
+  FaEnvelope,
   FaMoneyBillWave,
   FaQrcode,
   FaTruck,
   FaCheckCircle,
 } from "react-icons/fa";
+import QRCode from "react-qr-code";
 import "./Checkout.css";
+import { sendOrderEmail } from "../services/EmailService";
+import { OrderContext } from "../contextApi/OrderContext";
+import Swal from "sweetalert2";
+
 
 function Checkout() {
   const { cart, clearCart } = useContext(CartContext);
@@ -21,42 +27,133 @@ function Checkout() {
   const {
     grandTotal = 0,
     discount = 0,
+    deliveryCharge = 0,
     finalAmount = 0,
     couponPercent = 0,
   } = location.state || {};
 
   const [name, setName] = useState("");
   const [mobile, setMobile] = useState("");
+  const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
   const [paymentMode, setPaymentMode] = useState("");
+  const { addOrder } = useContext(OrderContext);
 
-  const placeOrder = () => {
-    if (!name.trim() || !mobile.trim() || !address.trim()) {
-      alert("Please fill all address details.");
+  const getCurrentLocation = () => {
+  if (!navigator.geolocation) {
+    alert("Geolocation is not supported.");
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      console.log(position.coords.latitude, position.coords.longitude);
+    },
+    () => {
+      alert("Unable to get location.");
+    }
+  );
+};
+
+  const placeOrder = async () => {
+    if (!name.trim() || !mobile.trim() || !email.trim() || !address.trim()) {
+      alert("Please fill all delivery details.");
       return;
     }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+
     if (!paymentMode) {
       alert("Please select a payment method.");
       return;
     }
 
-    alert("Order Placed Successfully!");
-    clearCart();
-    navigate("/cart");
-  };
+    Swal.fire({
+  icon: "success",
+  title: "✅ Order Placed!",
+  text: `Your order has been placed successfully.\nOrder ID: ${12345}`,
 
-  // If cart is empty and we accessed checkout, redirect back to cart
-  if (cart.length === 0) {
-    return (
-      <div className="checkout-empty-state">
-        <h2>Your Cart is Empty</h2>
-        <p>Add items to your cart before proceeding to checkout.</p>
-        <button onClick={() => navigate("/")} className="shop-now-btn">
-          Shop Now
-        </button>
-      </div>
-    );
+  showConfirmButton: true,
+  confirmButtonText: "Track Order",
+  confirmButtonColor: "#2563eb",
+
+  showCancelButton: true,
+  cancelButtonText: "Close/Cancel",
+  cancelButtonColor: "#ef4444",
+
+  timer: 10000,
+  timerProgressBar: true,
+}).then((result) => {
+  // If user clicks "Track Order"
+  if (result.isConfirmed) {
+    navigate("/orders");
   }
+
+  // If timer completes automatically
+  if (result.dismiss === Swal.DismissReason.timer) {
+    navigate("/orders");
+  }
+});
+
+    const order = {
+      order_id: Math.floor(Math.random() * 100000),
+      name: name,
+      email: email, // Recipient email
+	  
+      orders: cart.map((item) => ({
+        name: item.name,
+        units: item.quantity,
+        price: item.price,
+        image_url: item.imageurl,
+      })),
+
+      cost: {
+        shipping: 100,
+        tax: 100,
+        coupon: discount,
+        total: finalAmount,
+      },
+    };
+    
+    await sendOrderEmail(order);
+
+    const orderData = {
+      orderNumber: Math.floor(Math.random() * 100000),
+
+      customerName: name,
+
+      mobile: mobile,
+
+      email: email,
+
+      address: address,
+
+      paymentMode: paymentMode,
+
+      grandTotal: grandTotal,
+
+      discount: discount,
+
+      finalAmount: finalAmount,
+
+      orderDate: new Date().toLocaleString(),
+
+      status: "PLACED",
+
+      items: [...cart],
+    };
+
+    
+    addOrder(orderData);
+
+    clearCart();
+
+    navigate("/orders");
+  };
 
   return (
     <div className="checkout-page">
@@ -99,6 +196,29 @@ function Checkout() {
                   />
                 </div>
               </div>
+
+              <div className="form-group-checkout">
+                <label>Email Address</label>
+                <div className="input-with-icon">
+                  <FaEnvelope className="field-icon" />
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter Email Address"
+                    required
+                  />
+                </div>
+              </div>
+
+               <button
+    type="button"
+    onClick={getCurrentLocation}
+    className="location-btn"
+  >
+    <FaMapMarkerAlt />
+    Use Current Location
+  </button>
 
               <div className="form-group-checkout">
                 <label>Delivery Address</label>
@@ -150,8 +270,16 @@ function Checkout() {
             {/* Dynamic Payment Info Details */}
             {paymentMode === "UPI" && (
               <div className="payment-details-info upi-details-box">
-                <img src="/images/qr.png" alt="Payment QR Code" className="qr-image" />
-                <p>Scan the QR code using any UPI app to make payment.</p>
+                <div className="qr-section">
+                  <h4>Scan UPI QR to Pay ₹{finalAmount.toFixed(2)}</h4>
+                  <div className="qr-code-wrapper">
+                    <QRCode
+                      value={`upi://pay?pa=9652270638@kotakbank&pn=BaluFreshMart&am=${finalAmount.toFixed(2)}&cu=INR`}
+                      size={180}
+                    />
+                  </div>
+                  <p className="upi-id-text">UPI ID: 9652270638@kotakbank</p>
+                </div>
               </div>
             )}
 
@@ -188,6 +316,17 @@ function Checkout() {
                 </div>
               )}
 
+              <div className="summary-item">
+                <span>Delivery Charge</span>
+                <strong>
+                  {deliveryCharge === 0 ? (
+                    <span className="free-delivery">FREE</span>
+                  ) : (
+                    `₹${deliveryCharge.toFixed(2)}`
+                  )}
+                </strong>
+              </div>
+
               <div className="summary-divider-line"></div>
 
               <div className="summary-item payable-item">
@@ -199,6 +338,7 @@ function Checkout() {
             <button onClick={placeOrder} className="place-order-btn">
               <FaCheckCircle /> Place Order
             </button>
+            
           </div>
         </div>
       </div>

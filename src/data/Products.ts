@@ -11,7 +11,7 @@ export const vegItems: Product[] = [
   {
     id: 102,
     name: "Brinjal",
-    price: 20,
+    price: 1,
     imageurl: "/images/vegitems/brinjal.png",
     description: "Glossy purple brinjal, perfect for baking and curries.",
   },

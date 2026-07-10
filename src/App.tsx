@@ -19,6 +19,7 @@ import Search from "./components/Search.tsx";
 import Checkout from "./components/Checkout.tsx";
 
 import "./App.css";
+import Orders from "./components/Order.tsx";
 
 function App() {
   const { cart } = useContext(CartContext);
@@ -128,6 +129,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/search" element={<Search />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/orders" element={<Orders />} />
         </Routes>
       </main>
 

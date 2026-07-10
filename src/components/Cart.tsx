@@ -60,7 +60,7 @@ function Cart() {
   );
 
   const discount = (grandTotal * couponPercent) / 100;
-  const deliveryCharge = grandTotal > 0 ? (grandTotal > 500 ? 0 : 30) : 0;
+  const deliveryCharge = 0;
   const finalAmount = grandTotal - discount + deliveryCharge;
 
   return (
@@ -230,6 +230,7 @@ function Cart() {
                     state: {
                       grandTotal,
                       discount,
+                      deliveryCharge,
                       finalAmount,
                       couponPercent,
                     },

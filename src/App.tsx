@@ -105,12 +105,15 @@ function App() {
           <NavLink className="nav-link" to="/">
             <LuHouse size={18} /> Home
           </NavLink>
+
           <NavLink className="nav-link veg-tab" to="/veg-items">
             <PiCarrotBold size={18} /> Veg Items
           </NavLink>
-          <NavLink className="nav-link nonveg-tab" to="/non-veg-items">
+
+           <NavLink className="nav-link nonveg-tab" to="/non-veg-items">
             <GiChickenOven size={18} /> Non Veg Items
           </NavLink>
+
           <NavLink className="nav-link milk-tab" to="/milk-items">
             <LuMilk size={18} /> Milk Items
           </NavLink>
@@ -120,9 +123,9 @@ function App() {
       {/* Main Content Area */}
       <main className="content-container">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/Home" element={<Home />} />       
           <Route path="/veg-items" element={<VegItems />} />
-          <Route path="/non-veg-items" element={<NonVeg />} />
+          <Route path="/" element={<NonVeg />} />
           <Route path="/milk-items" element={<Milk />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
